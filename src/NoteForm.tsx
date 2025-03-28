@@ -9,13 +9,21 @@ type NoteFormProps = {
   onSubmit: (data: NoteData) => void;
   onAddTag: (tag: Tag) => void;
   availableTags: Tag[];
-};
+} & Partial<NoteData>;
+// partial allows us to make the NoteData optional, can pass any notedata in but not rly required
 
-export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
+export function NoteForm({
+  onSubmit,
+  onAddTag,
+  availableTags,
+  title = "",
+  markdown = "",
+  tags = []
+}: NoteFormProps) {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
-  const navigate = useNavigate()
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
+  const navigate = useNavigate();
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -26,7 +34,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
       tags: selectedTags,
     });
     // navigates back to the main page on save click
-    navigate("..")
+    navigate("..");
   }
 
   return (
@@ -36,7 +44,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
-              <Form.Control ref={titleRef} required />
+              <Form.Control ref={titleRef} required defaultValue={title} />
             </Form.Group>
           </Col>
 
@@ -70,7 +78,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
 
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
-          <Form.Control required as="textarea" ref={markdownRef} rows={15} />
+          <Form.Control defaultValue={markdown} required as="textarea" ref={markdownRef} rows={15} />
         </Form.Group>
 
         <Stack direction="horizontal" gap={2} className="justify-content-end">
