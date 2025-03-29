@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
-import { data, Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { NewNote } from "./NewNote";
 import { useLocalStorage } from "./useLocalStorage";
 import { useMemo } from "react";
