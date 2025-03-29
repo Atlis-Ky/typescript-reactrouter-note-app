@@ -63,7 +63,8 @@ export function NoteList({
     <>
       <Row className="mb-4 align-items-center">
         <Col>
-          <h1>Notes</h1>
+          <h1>TypeScript / React Router Notes app</h1>
+          <h4 style={{ fontSize: "14px", marginTop: "40px" }}>Use the buttons and forms on screen to create new notes, search notes by title or tags. The "Edit Tags" button will open a modal window to allow you to change the content of notes you have created, or simply remove them entirely. I've kept the design relatively simplified to allow the focus of this app to demonstrate functional use of TypeScript, React Router, Bootstrap elements, and various react hooks.</h4>
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
@@ -185,10 +186,19 @@ function EditTagsModal({
             {availableTags.map((tag) => (
               <Row key={tag.id}>
                 <Col>
-                  <Form.Control type="text" value={tag.label} onChange={e => onUpdateTag(tag, e.target.value)} />
+                  <Form.Control
+                    type="text"
+                    value={tag.label}
+                    onChange={(e) => onUpdateTag(tag.id, e.target.value)}
+                  />
                 </Col>
                 <Col xs="auto">
-                  <Button onClick={() => onDeleteTag(tag.id)} variant="outline-danger">&times;</Button>
+                  <Button
+                    onClick={() => onDeleteTag(tag.id)}
+                    variant="outline-danger"
+                  >
+                    &times;
+                  </Button>
                 </Col>
               </Row>
             ))}

@@ -3,6 +3,8 @@ import { useNote } from "./NoteLayout";
 import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
+// type declaration for note component, useful for preventing errors later on
+
 type NoteProps = {
   onDelete: (id: string) => void;
 };
@@ -13,6 +15,7 @@ export function Note({ onDelete }: NoteProps) {
 
   return (
     <>
+    {/* note title + tags, maps thru each tag to render the right labels */}
       <Row className="align-items-center mb-4">
         <Col>
           <h1>{note.title}</h1>
@@ -26,6 +29,8 @@ export function Note({ onDelete }: NoteProps) {
             </Stack>
           )}
         </Col>
+
+        {/* Action buttons: Edit, Delete, and Back */}
 
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">

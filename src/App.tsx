@@ -37,6 +37,8 @@ export type Tag = {
   label: string;
 };
 
+// Functions
+
 function App() {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
@@ -108,6 +110,7 @@ function App() {
   return (
     <Container className="my-4">
       <Routes>
+        {/* Home route: Displays the list of notes */}
         <Route
           path="/"
           element={
@@ -119,6 +122,7 @@ function App() {
             />
           }
         />
+        {/* Route for creating a new note */}
         <Route
           path="/new"
           element={
@@ -129,6 +133,7 @@ function App() {
             />
           }
         />
+        {/* Nested routes for viewing and editing a note */}
         <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
           <Route index element={<Note onDelete={onDeleteNote} />} />
           <Route
@@ -142,6 +147,7 @@ function App() {
             }
           />
         </Route>
+        {/* Fallback route: Redirects to the home page */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Container>
